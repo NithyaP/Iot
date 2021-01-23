@@ -1,4 +1,5 @@
 <h1>hi</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <body>
     <h2>
@@ -25,7 +26,7 @@
 
 .Temp {background-color: #4CAF50;} /* Green */
 .Hum {background-color: #008CBA;} /* Blue */
-.Prec{background-color: #aa25b6;}
+.prec{background-color: #aa25b6;}
 </style>
 </head>
 <body>
@@ -33,9 +34,62 @@
 <h1>The button element - Styled with CSS</h1>
 <p>Change the background color of a button with the background-color property:</p>
 
-<button class="button Temp">Temperature {{sensorvalues.temp}}</button>
-<button class="button Hum">Humditiy {{sensorvalues.hum}}</button>
-<button class="button Prec">Precision {{sensorvalues.prec}}</button>
+<button class="button Temp" id="button1">Temperature </button>
+<button class="button Hum" id="button2">Humditiy </button>
+<button class="button prec" id="button3">Precision </button>
 
 </body>
 </html>
+
+
+<script>
+$(document).ready(function() {
+  $('#button1').click(function(event) {
+    
+    $.ajax({
+        url : '/api/sensordata/temp',
+        type : 'GET',
+        dataType : 'json',
+        success : function(data) {
+          console.log(data)
+          document.querySelector('#button1').innerHTML = "temperature "+data['value'];
+        },
+        error : function() {
+            alert('There was an error');
+        }
+    });
+  });
+
+  $('#button2').click(function(event) {
+    
+    $.ajax({
+        url : '/api/sensordata/hum',
+        type : 'GET',
+        dataType : 'json',
+        success : function(data) {
+          console.log(data)
+          document.querySelector('#button2').innerHTML = "humditiy  "+data['value'];
+        },
+        error : function() {
+            alert('There was an error');
+        }
+    });
+  });
+
+  $('#button3').click(function(event) {
+    
+    $.ajax({
+        url : '/api/sensordata/prec',
+        type : 'GET',
+        dataType : 'json',
+        success : function(data) {
+          console.log(data)
+          document.querySelector('#button3').innerHTML = "Precision "+data['value'];
+        },
+        error : function() {
+            alert('There was an error');
+        }
+    });
+  });
+});
+</script>

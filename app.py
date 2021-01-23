@@ -38,9 +38,9 @@ def precdata():
 
 @app.route("/")                   
 def Home():
-    sensor = {"temp" : 89,"hum" :34,"prec" : 1}
+    sensor = {"temp" : 90,"hum" :65,"prec" : 1}
     return render_template('index.html',sensorvalues=sensor)
     
        
-if __name__ == "__main__":        
-    app.run()                     
+if __name__ == "__main__":
+    app.run(debug=True)
